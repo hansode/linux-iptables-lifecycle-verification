@@ -14,6 +14,13 @@ Getting Started
 $ vagrant up
 ```
 
+Run tests
+---------
+
+```
+$ time ./run-tests.sh
+```
+
 License
 -------
 
