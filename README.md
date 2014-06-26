@@ -1,3 +1,22 @@
+Linux: iptables lifecycle
+=========================
+
+iptables service commands:
+
++ start
++ stop
++ restart|force-reload
++ reload
++ condrestart|try-restart
++ status
++ panic
++ save
+
+status:
+
++ not running
++ running
+
 Linux: iptables lifecycle verification
 ======================================
 
