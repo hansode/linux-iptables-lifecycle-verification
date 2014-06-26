@@ -10,7 +10,12 @@
 
 function run_in_target() {
   local node=${1}; shift
-  vagrant ssh ${node} -c "${@}"
+
+  if [[ "${#}" == 0 ]]; then
+    vagrant ssh ${node}
+  else
+    vagrant ssh ${node} -c "${@}"
+  fi
 }
 
 function show_ipaddr() {
@@ -113,6 +118,15 @@ function generate_iptables_config() {
 function lsmod_iptables() {
   local node=${1}
   run_in_target ${node} "lsmod | egrep '^ipt|^nf_|^xt_'"
+}
+
+function disable_unload_module() {
+  local node=${1}
+  run_in_target ${node} <<-'EOS'
+	sudo cp /etc/sysconfig/iptables-config /etc/sysconfig/iptables-config.0
+	sudo sed -i "s,^IPTABLES_MODULES_UNLOAD=.*,IPTABLES_MODULES_UNLOAD=no," /etc/sysconfig/iptables-config
+	sudo diff /etc/sysconfig/iptables-config.0 /etc/sysconfig/iptables-config || :
+	EOS
 }
 
 ## iptables

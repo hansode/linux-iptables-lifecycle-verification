@@ -16,4 +16,10 @@ set -x
 
 node=node01
 
-show_ipaddr ${node} ifname=eth0
+disable_unload_module ${node}
+
+ start_iptables ${node}
+ lsmod_iptables ${node}
+
+  stop_iptables ${node}
+ lsmod_iptables ${node}

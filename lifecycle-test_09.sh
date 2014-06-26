@@ -14,8 +14,10 @@ set -x
 
 # main
 
- lsmod_iptables node01
- start_iptables node01
- lsmod_iptables node01
-  stop_iptables node01
- lsmod_iptables node01
+node=node01
+
+ lsmod_iptables ${node}
+ start_iptables ${node}
+ lsmod_iptables ${node}
+  stop_iptables ${node}
+ lsmod_iptables ${node}

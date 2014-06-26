@@ -14,4 +14,6 @@ set -x
 
 # main
 
-condrestart_iptables node01
+node=node01
+
+condrestart_iptables ${node}

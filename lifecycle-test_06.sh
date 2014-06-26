@@ -14,4 +14,6 @@ set -x
 
 # main
 
-save_iptables node01
+node=node01
+
+save_iptables ${node}

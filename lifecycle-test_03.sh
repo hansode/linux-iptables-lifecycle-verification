@@ -14,4 +14,6 @@ set -x
 
 # main
 
-restart_iptables node01
+node=node01
+
+restart_iptables ${node}
