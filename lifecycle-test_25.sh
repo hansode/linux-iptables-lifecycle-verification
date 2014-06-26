@@ -22,5 +22,6 @@ start_iptables ${node}
 
 generate_iptables_rule2 ${node}
 
+ status_iptables ${node}
  reload_iptables ${node}
-  lsmod_iptables ${node}
+ status_iptables ${node}
