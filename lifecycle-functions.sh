@@ -50,11 +50,30 @@ function generate_iptables_rule() {
 	_RULE_
 }
 
+function lsmod_iptables() {
+  local node=${1}
+  run_in_target ${node} "lsmod | egrep '^ipt|^nf_|^xt_'"
+}
+
 ## iptables
+
+### ignore exit status code
+
+function force_start_iptables() {
+  local node=${1}
+  run_in_target ${node} "sudo service iptables start || :"
+}
 
 function force_stop_iptables() {
   local node=${1}
   run_in_target ${node} "sudo service iptables stop || :"
+}
+
+### regular command
+
+function start_iptables() {
+  local node=${1}
+  run_in_target ${node} "sudo service iptables start"
 }
 
 function stop_iptables() {
@@ -62,14 +81,29 @@ function stop_iptables() {
   run_in_target ${node} "sudo service iptables stop"
 }
 
-function force_start_iptables() {
+function restart_iptables() {
   local node=${1}
-  run_in_target ${node} "sudo service iptables start || :"
+  run_in_target ${node} "sudo service iptables restart"
 }
 
-function start_iptables() {
+function reload_iptables() {
   local node=${1}
-  run_in_target ${node} "sudo service iptables start"
+  run_in_target ${node} "sudo service iptables reload"
+}
+
+function condrestart_iptables() {
+  local node=${1}
+  run_in_target ${node} "sudo service iptables condrestart"
+}
+
+function panic_iptables() {
+  local node=${1}
+  run_in_target ${node} "sudo service iptables panic"
+}
+
+function save_iptables() {
+  local node=${1}
+  run_in_target ${node} "sudo service iptables save"
 }
 
 function status_iptables() {
