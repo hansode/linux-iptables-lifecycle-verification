@@ -21,7 +21,10 @@ function run_in_target() {
 function show_ipaddr() {
   local node=${1}
   shift; eval local "${@}"
-  run_in_target ${node} "ip addr show ${ifname} | grep -w inet"
+  local addr=$(
+    run_in_target ${node} "ip addr show ${ifname} | grep -w inet" | awk '{print $2}'
+  )
+  echo ${addr%%/*}
 }
 
 ## iptables-rule
