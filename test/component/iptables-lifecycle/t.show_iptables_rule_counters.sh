@@ -12,8 +12,8 @@
 
 ## functions
 
-function test_show_ipaddr() {
-  show_ipaddr ${node} ifname=eth0
+function test_show_iptables_rule_counters() {
+  show_iptables_rule_counters ${node}
   assertEquals 0 ${?}
 }
 
