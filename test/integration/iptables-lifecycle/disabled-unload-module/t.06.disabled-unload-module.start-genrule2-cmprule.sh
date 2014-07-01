@@ -29,9 +29,7 @@ function test_disable_unload_start_genrule2_cmprule() {
     reload_iptables ${node}
 
     # in order to grow packet counter
-    for j in {1..3}; do
-      run_in_target ${node} "ping -c 1 -w 1 8.8.8.8" >/dev/null
-    done
+    run_in_target ${node} "curl -fsSkL http://www.yahoo.co.jp/" >/dev/null
 
     current_rule="$(show_iptables_rule_counters ${node})"
     assertEquals 0 ${?}
