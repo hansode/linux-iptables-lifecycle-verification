@@ -19,14 +19,21 @@ node=node01
 
 ## group functions
 
+###
+
 function _setup_iptables() {
   generate_iptables_rule   ${node}
   generate_iptables_config ${node}
   force_stop_iptables      ${node}
 }
 
-function before_setup_iptables() { :; }
-function  after_setup_iptables() { :; }
+function    before_setup_iptables() { :; }
+function     after_setup_iptables() { :; }
+function       _teardown_iptables() { :; }
+function before_teardown_iptables() { :; }
+function  after_teardown_iptables() { :; }
+
+###
 
 function setup_iptables() {
   before_setup_iptables
@@ -34,6 +41,18 @@ function setup_iptables() {
    after_setup_iptables
 }
 
+function teardown_iptables() {
+  before_terdown_iptables
+        _terdown_iptables
+   after_terdown_iptables
+}
+
+###
+
 function oneTimeSetUp() {
+  setup_iptables
+}
+
+function oneTimeTearDown() {
   setup_iptables
 }
