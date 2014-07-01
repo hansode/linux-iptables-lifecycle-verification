@@ -22,9 +22,11 @@ node=node01
 ###
 
 function _setup_iptables() {
-  generate_iptables_rule   ${node}
-  generate_iptables_config ${node}
-  force_stop_iptables      ${node}
+  {
+    generate_iptables_rule   ${node}
+    generate_iptables_config ${node}
+    force_stop_iptables      ${node}
+  } >/dev/null
 }
 
 function _teardown_iptables() {
