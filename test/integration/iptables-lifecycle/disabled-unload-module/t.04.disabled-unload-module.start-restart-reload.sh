@@ -13,9 +13,6 @@
 ## functions
 
 function test_disable_unload_start_restart_reload() {
-  start_iptables ${node}
-  assertEquals 0 ${?}
-
   for i in {1..3}; do
     restart_iptables ${node}
     assertEquals 0 ${?}
