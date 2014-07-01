@@ -25,8 +25,13 @@ function _setup_iptables() {
   force_stop_iptables      ${node}
 }
 
+function before_setup_iptables() { :; }
+function  after_setup_iptables() { :; }
+
 function setup_iptables() {
-  _setup_iptables
+  before_setup_iptables
+        _setup_iptables
+   after_setup_iptables
 }
 
 function oneTimeSetUp() {
