@@ -28,7 +28,7 @@ function test_disable_unload_start_genrule2_reload() {
   assertEquals 0 ${?}
 
   diff_str "${before_str}"  "${after_str}"
-  assertEquals 0 ${?}
+  assertNotEquals 0 ${?}
 }
 
 ## shunit2
