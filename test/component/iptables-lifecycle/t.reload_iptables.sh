@@ -12,10 +12,14 @@
 
 ## functions
 
-function test_reload_iptables() {
+function setUp() {
   # "reload" depends on iptables running
+  force_start_iptables ${node}
+}
+
+function test_reload_iptables() {
   reload_iptables ${node}
-  assertNotEquals 0 ${?}
+  assertEquals 0 ${?}
 }
 
 ## shunit2

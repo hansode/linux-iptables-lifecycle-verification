@@ -12,10 +12,14 @@
 
 ## functions
 
-function test_status_iptables() {
+function setUp() {
   # "status" depends on iptables running
+  force_start_iptables ${node}
+}
+
+function test_status_iptables() {
   status_iptables ${node}
-  assertNotEquals 0 ${?}
+  assertEquals 0 ${?}
 }
 
 ## shunit2

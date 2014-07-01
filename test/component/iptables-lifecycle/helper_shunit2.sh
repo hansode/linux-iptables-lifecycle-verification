@@ -19,7 +19,7 @@ node=node01
 
 ## group functions
 
-function setUp() {
+function oneTimeSetUp() {
   generate_iptables_rule   ${node}
   generate_iptables_config ${node}
  #show_iptables_rule       ${node}
