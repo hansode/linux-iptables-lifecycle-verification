@@ -41,7 +41,11 @@ function show_iptables_rule_counters() {
 
 function generate_iptables_rule() {
   local node=${1}
-  run_in_target ${node} "sudo tee /etc/sysconfig/iptables" <<-'_RULE_' >/dev/null
+  run_in_target ${node} "sudo tee /etc/sysconfig/iptables" < <(render_iptables_rule) >/dev/null
+}
+
+function render_iptables_rule() {
+  cat <<-'_RULE_'
 	*nat
 	:PREROUTING ACCEPT [0:0]
 	:POSTROUTING ACCEPT [0:0]
@@ -65,7 +69,11 @@ function generate_iptables_rule() {
 
 function generate_iptables_rule2() {
   local node=${1}
-  run_in_target ${node} "sudo tee /etc/sysconfig/iptables" <<-'_RULE_' >/dev/null
+  run_in_target ${node} "sudo tee /etc/sysconfig/iptables" < <(render_iptables_rule2) >/dev/null
+}
+
+function render_iptables_rule2() {
+  cat <<-'_RULE_'
 	*nat
 	:PREROUTING ACCEPT [0:0]
 	:POSTROUTING ACCEPT [0:0]
