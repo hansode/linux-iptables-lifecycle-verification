@@ -12,20 +12,20 @@
 
 ## functions
 
-function setUp() {
-  disable_unload_module ${node}
-}
-
-function test_disable_unload_start_restart() {
+function test_disable_unload_start_stop() {
   start_iptables ${node}
   assertEquals 0 ${?}
 
-  restart_iptables ${node}
+  lsmod_iptables ${node}
+  assertEquals 0 ${?}
+
+  stop_iptables ${node}
   assertEquals 0 ${?}
 
   lsmod_iptables ${node}
   assertEquals 0 ${?}
 }
+
 
 ## shunit2
 

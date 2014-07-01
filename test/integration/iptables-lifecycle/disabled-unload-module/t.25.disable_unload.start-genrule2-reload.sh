@@ -12,10 +12,6 @@
 
 ## functions
 
-function setUp() {
-  disable_unload_module ${node}
-}
-
 function test_disable_unload_start_genrule2_reload() {
   start_iptables ${node}
   assertEquals 0 ${?}
