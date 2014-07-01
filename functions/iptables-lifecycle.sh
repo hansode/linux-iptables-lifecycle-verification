@@ -38,7 +38,7 @@ function show_iptables_rule_counters() {
 
 function generate_iptables_rule() {
   local node=${1}
-  run_in_target ${node} "sudo tee /etc/sysconfig/iptables" <<-'_RULE_'
+  run_in_target ${node} "sudo tee /etc/sysconfig/iptables" <<-'_RULE_' >/dev/null
 	*nat
 	:PREROUTING ACCEPT [0:0]
 	:POSTROUTING ACCEPT [0:0]
@@ -62,7 +62,7 @@ function generate_iptables_rule() {
 
 function generate_iptables_rule2() {
   local node=${1}
-  run_in_target ${node} "sudo tee /etc/sysconfig/iptables" <<-'_RULE_'
+  run_in_target ${node} "sudo tee /etc/sysconfig/iptables" <<-'_RULE_' >/dev/null
 	*nat
 	:PREROUTING ACCEPT [0:0]
 	:POSTROUTING ACCEPT [0:0]
@@ -88,7 +88,7 @@ function generate_iptables_rule2() {
 
 function generate_iptables_config() {
   local node=${1}
-  run_in_target ${node} "sudo tee /etc/sysconfig/iptables-config" <<-'_CONFIG_'
+  run_in_target ${node} "sudo tee /etc/sysconfig/iptables-config" <<-'_CONFIG_' >/dev/null
 	# Load additional iptables modules (nat helpers)
 	#   Default: -none-
 	# Space separated list of nat helpers (e.g. 'ip_nat_ftp ip_nat_irc'), which
