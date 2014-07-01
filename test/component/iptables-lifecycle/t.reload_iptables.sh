@@ -13,8 +13,9 @@
 ## functions
 
 function test_reload_iptables() {
+  # "reload" depends on iptables running
   reload_iptables ${node}
-  assertEquals 0 ${?}
+  assertNotEquals 0 ${?}
 }
 
 ## shunit2
