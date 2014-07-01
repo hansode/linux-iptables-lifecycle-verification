@@ -16,18 +16,18 @@ function test_disable_unload_start_genrule2_reload() {
   generate_iptables_rule2 ${node}
   assertEquals 0 ${?}
 
-  before_status="$(status_iptables ${node})"
-  [[ -n "${before_status}" ]]
+  before_str="$(status_iptables ${node})"
+  [[ -n "${before_str}" ]]
   assertEquals 0 ${?}
 
   reload_iptables ${node}
   assertEquals 0 ${?}
 
-  after_status="$(status_iptables ${node})"
-  [[ -n "${after_status}" ]]
+  after_str="$(status_iptables ${node})"
+  [[ -n "${after_str}" ]]
   assertEquals 0 ${?}
 
-  diff_str "${before_lsmod}"  "${after_lsmod}"
+  diff_str "${before_str}"  "${after_str}"
   assertEquals 0 ${?}
 }
 
