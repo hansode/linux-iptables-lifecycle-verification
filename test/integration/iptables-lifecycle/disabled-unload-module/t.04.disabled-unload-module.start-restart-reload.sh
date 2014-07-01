@@ -17,13 +17,18 @@ function test_disable_unload_start_restart_reload() {
     restart_iptables ${node}
     assertEquals 0 ${?}
 
-    lsmod_iptables ${node}
+    before_str="$(lsmod_iptables ${node})"
+    [[ -n "${before_str}" ]]
     assertEquals 0 ${?}
 
     reload_iptables ${node}
     assertEquals 0 ${?}
 
-    lsmod_iptables ${node}
+    after_str="$(lsmod_iptables ${node})"
+    [[ -n "${after_str}" ]]
+    assertEquals 0 ${?}
+
+    diff_str "${before_str}"  "${after_str}"
     assertEquals 0 ${?}
   done
 }

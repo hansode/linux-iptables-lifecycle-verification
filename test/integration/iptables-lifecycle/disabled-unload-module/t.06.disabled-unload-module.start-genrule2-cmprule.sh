@@ -13,9 +13,9 @@
 ## functions
 
 function test_disable_unload_start_genrule2_cmprule() {
-  current_rule="$(show_iptables_rule_counters ${node})"
+  before_str="$(show_iptables_rule_counters ${node})"
   assertEquals 0 ${?}
-  previous_rule="${current_rule}"
+  after_str="${before_str}"
 
   generate_iptables_rule2 ${node}
   assertEquals 0 ${?}
@@ -24,17 +24,19 @@ function test_disable_unload_start_genrule2_cmprule() {
     echo "... i=${i}"
 
     reload_iptables ${node}
+    assertEquals 0 ${?}
 
     # in order to grow packet counter
     run_in_target ${node} "curl -fsSkL http://www.yahoo.co.jp/" >/dev/null
-
-    current_rule="$(show_iptables_rule_counters ${node})"
     assertEquals 0 ${?}
 
-    diff <(echo "${previous_rule}") <(echo "${current_rule}")
+    after_str="$(show_iptables_rule_counters ${node})"
+    assertEquals 0 ${?}
+
+    diff_str "${before_str}" "${after_str}"
     assertNotEquals 0 ${?}
 
-    previous_rule="${current_rule}"
+    before_str="${after_str}"
   done
 }
 

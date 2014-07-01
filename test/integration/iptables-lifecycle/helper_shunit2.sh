@@ -19,6 +19,12 @@ node=node01
 
 ## group functions
 
+function diff_str() {
+  local before_str=${1} after_str=${2}
+
+  diff <(echo "${before_str}") <(echo "${after_str}")
+}
+
 ###
 
 function _setup_iptables() {
