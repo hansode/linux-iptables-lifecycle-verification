@@ -19,26 +19,22 @@ function test_disable_unload_start_genrule2_cmprule() {
   start_iptables ${node}
   assertEquals 0 ${?}
 
-  generate_iptables_rule2 ${node}
-  assertEquals 0 ${?}
-
   current_rule="$(show_iptables_rule_counters ${node})"
   assertEquals 0 ${?}
   previous_rule="${current_rule}"
 
-  for i in {1..3}; do
+  generate_iptables_rule2 ${node}
+  assertEquals 0 ${?}
+
+  for i in {1..5}; do
     echo "... i=${i}"
 
     reload_iptables ${node}
     current_rule="$(show_iptables_rule_counters ${node})"
     assertEquals 0 ${?}
 
-    # wait for count up of iptables
-    sleep 1
-
     diff <(echo "${previous_rule}") <(echo "${current_rule}")
-    ret=${?}; echo ret=${ret}
-    assertNotEquals 0 ${ret}
+    assertNotEquals 0 ${?}
 
     previous_rule="${current_rule}"
   done
