@@ -37,7 +37,7 @@ Run tests
 ---------
 
 ```
-$ time ./run-tests.sh
+$ make test
 ```
 
 License

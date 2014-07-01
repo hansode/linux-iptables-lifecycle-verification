@@ -21,7 +21,10 @@ function run_in_target() {
 function show_ipaddr() {
   local node=${1}
   shift; eval local "${@}"
-  run_in_target ${node} "ip addr show ${ifname} | grep -w inet"
+  local addr=$(
+    run_in_target ${node} "ip addr show ${ifname} | grep -w inet" | awk '{print $2}'
+  )
+  echo ${addr%%/*}
 }
 
 ## iptables-rule
@@ -38,7 +41,11 @@ function show_iptables_rule_counters() {
 
 function generate_iptables_rule() {
   local node=${1}
-  run_in_target ${node} "sudo tee /etc/sysconfig/iptables" <<-'_RULE_'
+  run_in_target ${node} "sudo tee /etc/sysconfig/iptables" < <(render_iptables_rule) >/dev/null
+}
+
+function render_iptables_rule() {
+  cat <<-'_RULE_'
 	*nat
 	:PREROUTING ACCEPT [0:0]
 	:POSTROUTING ACCEPT [0:0]
@@ -62,7 +69,11 @@ function generate_iptables_rule() {
 
 function generate_iptables_rule2() {
   local node=${1}
-  run_in_target ${node} "sudo tee /etc/sysconfig/iptables" <<-'_RULE_'
+  run_in_target ${node} "sudo tee /etc/sysconfig/iptables" < <(render_iptables_rule2) >/dev/null
+}
+
+function render_iptables_rule2() {
+  cat <<-'_RULE_'
 	*nat
 	:PREROUTING ACCEPT [0:0]
 	:POSTROUTING ACCEPT [0:0]
@@ -88,7 +99,11 @@ function generate_iptables_rule2() {
 
 function generate_iptables_config() {
   local node=${1}
-  run_in_target ${node} "sudo tee /etc/sysconfig/iptables-config" <<-'_CONFIG_'
+  run_in_target ${node} "sudo tee /etc/sysconfig/iptables-config" < <(render_iptables_config) >/dev/null
+}
+
+function render_iptables_config() {
+  cat <<-'_CONFIG_'
 	# Load additional iptables modules (nat helpers)
 	#   Default: -none-
 	# Space separated list of nat helpers (e.g. 'ip_nat_ftp ip_nat_irc'), which
