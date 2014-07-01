@@ -13,14 +13,19 @@
 ## functions
 
 function test_disable_unload_start_stop() {
-  lsmod_iptables ${node}
+  before_lsmod="$(lsmod_iptables ${node})"
+  [[ -n "${before_lsmod}" ]]
   assertEquals 0 ${?}
 
   stop_iptables ${node}
   assertEquals 0 ${?}
 
-  lsmod_iptables ${node}
+  after_lsmod="$(lsmod_iptables ${node})"
+  [[ -n "${after_lsmod}" ]]
   assertEquals 0 ${?}
+
+  diff <(echo "${before_lsmod}") <(echo "${after_lsmod}")
+  assertNotEquals 0 ${?}
 }
 
 
