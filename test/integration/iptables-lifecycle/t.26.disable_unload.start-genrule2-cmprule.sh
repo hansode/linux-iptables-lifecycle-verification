@@ -12,10 +12,11 @@
 
 ## functions
 
-function test_disable_unload_start_genrule2_cmprule() {
+function setUp() {
   disable_unload_module ${node}
-  assertEquals 0 ${?}
+}
 
+function test_disable_unload_start_genrule2_cmprule() {
   start_iptables ${node}
   assertEquals 0 ${?}
 
@@ -32,7 +33,7 @@ function test_disable_unload_start_genrule2_cmprule() {
     reload_iptables ${node}
 
     # in order to grow packet counter
-    run_in_target ${node} "ping -c 1 -w 1 8.8.8.8"
+    run_in_target ${node} "ping -c 1 -w 1 8.8.8.8" >/dev/null
 
     current_rule="$(show_iptables_rule_counters ${node})"
     assertEquals 0 ${?}

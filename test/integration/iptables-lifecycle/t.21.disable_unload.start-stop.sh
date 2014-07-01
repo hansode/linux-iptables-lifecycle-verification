@@ -12,10 +12,11 @@
 
 ## functions
 
-function test_disable_unload_start_stop() {
+function setUp() {
   disable_unload_module ${node}
-  assertEquals 0 ${?}
+}
 
+function test_disable_unload_start_stop() {
   start_iptables ${node}
   assertEquals 0 ${?}
 
