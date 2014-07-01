@@ -19,10 +19,14 @@ node=node01
 
 ## group functions
 
-function setup_iptables() {
+function _setup_iptables() {
   generate_iptables_rule   ${node}
   generate_iptables_config ${node}
   force_stop_iptables      ${node}
+}
+
+function setup_iptables() {
+  _setup_iptables
 }
 
 function oneTimeSetUp() {
