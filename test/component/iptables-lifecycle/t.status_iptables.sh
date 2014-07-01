@@ -13,8 +13,9 @@
 ## functions
 
 function test_status_iptables() {
+  # "status" depends on iptables running
   status_iptables ${node}
-  assertEquals 0 ${?}
+  assertNotEquals 0 ${?}
 }
 
 ## shunit2
