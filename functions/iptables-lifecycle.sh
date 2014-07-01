@@ -13,20 +13,20 @@ LOG_LEVEL=${LOG_LEVEL:-info}
 function run_in_target() {
   local node=${1}; shift
 
-  exec 3<&2
+  exec 4<&2
 
   case "$(tr A-Z a-z <<< "${LOG_LEVEL}")" in
     debug)
       ;;
     *)
-      exec 3>/dev/null
+      exec 4>/dev/null
       ;;
   esac
 
   if [[ "${#}" == 0 ]]; then
-    vagrant ssh ${node} 2>&3
+    vagrant ssh ${node} 2>&4
   else
-    vagrant ssh ${node} -c "${@}" 2>&3
+    vagrant ssh ${node} -c "${@}" 2>&4
   fi
 }
 
