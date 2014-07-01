@@ -1,3 +1,22 @@
+Linux: iptables lifecycle
+=========================
+
+iptables service commands:
+
++ start
++ stop
++ restart|force-reload
++ reload
++ condrestart|try-restart
++ status
++ panic
++ save
+
+status:
+
++ not running
++ running
+
 Linux: iptables lifecycle verification
 ======================================
 
@@ -12,6 +31,13 @@ Getting Started
 
 ```
 $ vagrant up
+```
+
+Run tests
+---------
+
+```
+$ time ./run-tests.sh
 ```
 
 License
