@@ -30,6 +30,10 @@ function test_disable_unload_start_genrule2_cmprule() {
     echo "... i=${i}"
 
     reload_iptables ${node}
+
+    # in order to grow packet counter
+    run_in_target ${node} "ping -c 1 -w 1 8.8.8.8"
+
     current_rule="$(show_iptables_rule_counters ${node})"
     assertEquals 0 ${?}
 
