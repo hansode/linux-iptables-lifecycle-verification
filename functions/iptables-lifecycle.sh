@@ -4,6 +4,8 @@
 #  bash
 #
 
+LOG_LEVEL=${LOG_LEVEL:-info}
+
 # functions
 
 ## common
@@ -11,10 +13,20 @@
 function run_in_target() {
   local node=${1}; shift
 
+  exec 3<&2
+
+  case "$(tr A-Z a-z <<< "${LOG_LEVEL}")" in
+    debug)
+      ;;
+    *)
+      exec 3>/dev/null
+      ;;
+  esac
+
   if [[ "${#}" == 0 ]]; then
-    vagrant ssh ${node}
+    vagrant ssh ${node} 2>&3
   else
-    vagrant ssh ${node} -c "${@}"
+    vagrant ssh ${node} -c "${@}" 2>&3
   fi
 }
 
