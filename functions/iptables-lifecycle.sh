@@ -99,7 +99,11 @@ function render_iptables_rule2() {
 
 function generate_iptables_config() {
   local node=${1}
-  run_in_target ${node} "sudo tee /etc/sysconfig/iptables-config" <<-'_CONFIG_' >/dev/null
+  run_in_target ${node} "sudo tee /etc/sysconfig/iptables-config" < <(render_iptables_config) >/dev/null
+}
+
+function render_iptables_config() {
+  cat <<-'_CONFIG_'
 	# Load additional iptables modules (nat helpers)
 	#   Default: -none-
 	# Space separated list of nat helpers (e.g. 'ip_nat_ftp ip_nat_irc'), which
