@@ -15,5 +15,7 @@
 ## group functions
 
 function setUp() {
-  disable_unload_module ${node}
+  {
+    disable_unload_module ${node}
+  } >/dev/null
 }
