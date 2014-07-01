@@ -13,9 +13,6 @@
 ## functions
 
 function test_disable_unload_start_genrule2_reload() {
-  start_iptables ${node}
-  assertEquals 0 ${?}
-
   generate_iptables_rule2 ${node}
   assertEquals 0 ${?}
 

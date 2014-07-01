@@ -17,5 +17,6 @@
 function setUp() {
   {
     disable_unload_module ${node}
+    start_iptables ${node}
   } >/dev/null
 }

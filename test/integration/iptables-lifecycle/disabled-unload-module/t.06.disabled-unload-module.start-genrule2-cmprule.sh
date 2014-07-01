@@ -13,9 +13,6 @@
 ## functions
 
 function test_disable_unload_start_genrule2_cmprule() {
-  start_iptables ${node}
-  assertEquals 0 ${?}
-
   current_rule="$(show_iptables_rule_counters ${node})"
   assertEquals 0 ${?}
   previous_rule="${current_rule}"

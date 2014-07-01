@@ -13,9 +13,6 @@
 ## functions
 
 function test_disable_unload_start_stop() {
-  start_iptables ${node}
-  assertEquals 0 ${?}
-
   lsmod_iptables ${node}
   assertEquals 0 ${?}
 
