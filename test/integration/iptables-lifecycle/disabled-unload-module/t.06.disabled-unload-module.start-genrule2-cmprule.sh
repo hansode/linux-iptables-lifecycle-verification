@@ -31,7 +31,7 @@ function test_disable_unload_start_genrule2_cmprule() {
     current_rule="$(show_iptables_rule_counters ${node})"
     assertEquals 0 ${?}
 
-    diff <(echo "${previous_rule}") <(echo "${current_rule}")
+    diff_str "${previous_rule}" "${current_rule}"
     assertNotEquals 0 ${?}
 
     previous_rule="${current_rule}"

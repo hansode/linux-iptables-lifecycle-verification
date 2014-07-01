@@ -28,7 +28,7 @@ function test_disable_unload_start_restart_reload() {
     [[ -n "${after_lsmod}" ]]
     assertEquals 0 ${?}
 
-    diff <(echo "${before_lsmod}") <(echo "${after_lsmod}")
+    diff_str "${before_lsmod}"  "${after_lsmod}"
     assertEquals 0 ${?}
   done
 }
