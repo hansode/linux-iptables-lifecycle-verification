@@ -14,7 +14,7 @@
 
 ## group functions
 
-function setUp() {
+function after_setup_iptables() {
   {
     disable_unload_module ${node}
     start_iptables ${node}
