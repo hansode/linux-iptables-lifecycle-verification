@@ -51,9 +51,9 @@ function setup_iptables() {
 }
 
 function teardown_iptables() {
-   before_terdown_iptables
-         _terdown_iptables
-    after_terdown_iptables
+  before_teardown_iptables
+        _teardown_iptables
+   after_teardown_iptables
 }
 
 ###
@@ -63,5 +63,5 @@ function oneTimeSetUp() {
 }
 
 function oneTimeTearDown() {
-  setup_iptables
+  teardown_iptables
 }
