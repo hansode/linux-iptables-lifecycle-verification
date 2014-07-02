@@ -13,12 +13,12 @@
 ## functions
 
 function test_disable_unload_start_genrule2_cmprule() {
+  generate_iptables_rule2 ${node}
+  assertEquals 0 ${?}
+
   before_str="$(show_iptables_rule_counters ${node})"
   assertEquals 0 ${?}
   after_str="${before_str}"
-
-  generate_iptables_rule2 ${node}
-  assertEquals 0 ${?}
 
   for i in {1..5}; do
     echo "... i=${i}"
