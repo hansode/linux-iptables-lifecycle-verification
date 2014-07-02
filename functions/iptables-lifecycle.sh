@@ -43,7 +43,7 @@ function show_ipaddr() {
 
 function show_iptables_rule() {
   local node=${1}
-  run_in_target ${node} "sudo cat /etc/sysconfig/iptables"
+  run_in_target ${node} "sudo cat /etc/sysconfig/iptables | egrep -v '^#'"
 }
 
 function show_iptables_rule_counters() {
