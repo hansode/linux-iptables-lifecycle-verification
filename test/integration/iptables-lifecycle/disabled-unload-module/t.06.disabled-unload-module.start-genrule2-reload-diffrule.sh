@@ -17,7 +17,7 @@ function setUp() {
 }
 
 function test_disable_unload_start_genrule2_cmprule() {
-  echo "show iptables rule counters"
+  echo "... show iptables rule counters"
   before_str="$(show_iptables_rule_counters ${node})"
   [[ -n "${before_str}" ]]
   assertEquals 0 ${?}
