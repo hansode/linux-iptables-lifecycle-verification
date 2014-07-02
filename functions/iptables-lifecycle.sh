@@ -178,7 +178,7 @@ function lsmod_iptables() {
   run_in_target ${node} "lsmod | egrep '^ipt|^nf_|^xt_'"
 }
 
-function disable_unload_module() {
+function disable_module_unload() {
   local node=${1}
   run_in_target ${node} <<-'EOS'
 	sudo cp /etc/sysconfig/iptables-config /etc/sysconfig/iptables-config.0
