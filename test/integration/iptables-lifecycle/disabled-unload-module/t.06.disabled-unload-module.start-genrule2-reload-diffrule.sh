@@ -14,6 +14,7 @@
 
 function setUp() {
   generate_iptables_rule2 ${node}
+  reload_iptables ${node}
 }
 
 function test_disable_unload_start_genrule2_cmprule() {
