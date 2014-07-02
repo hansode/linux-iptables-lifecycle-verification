@@ -187,6 +187,15 @@ function disable_unload_module() {
 	EOS
 }
 
+function enable_save_on_restart() {
+  local node=${1}
+  run_in_target ${node} <<-'EOS'
+	sudo cp /etc/sysconfig/iptables-config /etc/sysconfig/iptables-config.0
+	sudo sed -i "s,^IPTABLES_SAVE_ON_RESTART=.*,IPTABLES_SAVE_ON_RESTART=yes," /etc/sysconfig/iptables-config
+	sudo diff /etc/sysconfig/iptables-config.0 /etc/sysconfig/iptables-config || :
+	EOS
+}
+
 ## iptables
 
 ### ignore exit status code
