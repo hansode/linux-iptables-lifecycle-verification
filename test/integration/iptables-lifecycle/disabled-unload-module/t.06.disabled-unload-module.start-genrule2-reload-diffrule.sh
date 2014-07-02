@@ -27,7 +27,7 @@ function test_disable_unload_start_genrule2_cmprule() {
     assertEquals 0 ${?}
 
     # in order to grow packet counter
-    run_in_target ${node} "curl -fsSkL http://www.yahoo.co.jp/" >/dev/null
+    run_in_target ${node} "curl -fsSkL --retry 3 http://www.yahoo.co.jp/" >/dev/null
     assertEquals 0 ${?}
 
     after_str="$(show_iptables_rule_counters ${node})"
