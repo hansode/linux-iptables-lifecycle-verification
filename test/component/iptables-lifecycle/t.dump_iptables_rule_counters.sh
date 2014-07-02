@@ -17,8 +17,8 @@ function setUp() {
   force_start_iptables ${node}
 }
 
-function test_show_iptables_rule_counters() {
-  show_iptables_rule_counters ${node}
+function test_dump_iptables_rule_counters() {
+  dump_iptables_rule_counters ${node}
   assertEquals 0 ${?}
 }
 

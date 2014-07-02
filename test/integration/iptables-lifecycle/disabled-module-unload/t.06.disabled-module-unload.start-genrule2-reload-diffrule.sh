@@ -18,7 +18,7 @@ function setUp() {
 }
 
 function test_disable_unload_start_genrule2_cmprule() {
-  before_str="$(show_iptables_rule_counters ${node})"
+  before_str="$(dump_iptables_rule_counters ${node})"
   [[ -n "${before_str}" ]]
   assertEquals "should show iptables rule and counters" 0 ${?}
 
@@ -33,7 +33,7 @@ function test_disable_unload_start_genrule2_cmprule() {
       j=$((${j} + 1))
     done
 
-    after_str="$(show_iptables_rule_counters ${node})"
+    after_str="$(dump_iptables_rule_counters ${node})"
     [[ -n "${after_str}" ]]
     assertEquals "should show iptables rule counters" 0 ${?}
 

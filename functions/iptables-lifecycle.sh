@@ -46,7 +46,7 @@ function show_iptables_rule() {
   run_in_target ${node} "sudo cat /etc/sysconfig/iptables | egrep -v '^#'"
 }
 
-function show_iptables_rule_counters() {
+function dump_iptables_rule_counters() {
   local node=${1}
   run_in_target ${node} "sudo iptables-save -c | egrep -v '^#'"
 }
