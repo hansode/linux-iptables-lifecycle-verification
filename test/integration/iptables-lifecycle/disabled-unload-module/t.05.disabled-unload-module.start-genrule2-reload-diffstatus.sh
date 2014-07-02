@@ -12,10 +12,12 @@
 
 ## functions
 
-function test_disable_unload_start_genrule2_reload() {
+function setUp() {
   generate_iptables_rule2 ${node}
-  assertEquals 0 ${?}
+}
 
+
+function test_disable_unload_start_genrule2_reload() {
   before_str="$(status_iptables ${node})"
   [[ -n "${before_str}" ]]
   assertEquals 0 ${?}
