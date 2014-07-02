@@ -16,7 +16,6 @@
 
 function after_setup_iptables() {
   {
-    disable_module_unload ${node}
     enable_save_on_restart ${node}
     start_iptables ${node}
   } >/dev/null
