@@ -10,4 +10,7 @@ build:
 test:
 	(cd $@ && make)
 
+status:
+	vagrant status
+
 .PHONY: $(TARGETS)
